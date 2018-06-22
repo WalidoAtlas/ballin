@@ -41166,55 +41166,133 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
-var Example = function (_Component) {
-    _inherits(Example, _Component);
+var User = function (_React$Component) {
+	_inherits(User, _React$Component);
 
-    function Example() {
-        _classCallCheck(this, Example);
+	function User() {
+		_classCallCheck(this, User);
 
-        return _possibleConstructorReturn(this, (Example.__proto__ || Object.getPrototypeOf(Example)).apply(this, arguments));
-    }
+		var _this = _possibleConstructorReturn(this, (User.__proto__ || Object.getPrototypeOf(User)).call(this));
 
-    _createClass(Example, [{
-        key: 'render',
-        value: function render() {
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'div',
-                { className: 'container' },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'div',
-                    { className: 'row' },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'div',
-                        { className: 'col-md-8 col-md-offset-2' },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'div',
-                            { className: 'panel panel-default' },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'div',
-                                { className: 'panel-heading' },
-                                'Example Component'
-                            ),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'div',
-                                { className: 'panel-body' },
-                                'I\'m an example component!'
-                            )
-                        )
-                    )
-                )
-            );
-        }
-    }]);
+		_this.state = {
+			data: []
+		};
+		return _this;
+	}
 
-    return Example;
-}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+	_createClass(User, [{
+		key: 'componentWillMount',
+		value: function componentWillMount() {
+			var $this = this;
 
-/* harmony default export */ __webpack_exports__["default"] = (Example);
+			axios.get('/api/users').then(function (response) {
+				$this.setState({
+					data: response.data
+				});
+			}).catch(function (error) {
+				console.log(error);
+			});
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+				'div',
+				null,
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'h2',
+					null,
+					'Users listing'
+				),
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'a',
+					{ href: '/users/create', className: 'btn btn-primary' },
+					'Add a new User'
+				),
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'table',
+					{ className: 'table table-bordered' },
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'thead',
+						null,
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'tr',
+							null,
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+								'th',
+								null,
+								'ID'
+							),
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+								'th',
+								null,
+								'Name'
+							),
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+								'th',
+								null,
+								'Email'
+							),
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+								'th',
+								null,
+								'Action'
+							)
+						)
+					),
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'tbody',
+						null,
+						this.state.data.map(function (user, i) {
+							return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+								'tr',
+								null,
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+									'td',
+									null,
+									user.id
+								),
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+									'td',
+									null,
+									user.name
+								),
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+									'td',
+									null,
+									user.email
+								),
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+									'td',
+									null,
+									__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+										'a',
+										{ href: '', className: 'btn btn-primary' },
+										'edit'
+									),
+									' ||',
+									__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+										'a',
+										{ href: '', className: 'btn btn-danger' },
+										'delete'
+									)
+								)
+							);
+						})
+					)
+				)
+			);
+		}
+	}]);
+
+	return User;
+}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (User);
 
 
-if (document.getElementById('example')) {
-    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Example, null), document.getElementById('example'));
+if (document.getElementById('app')) {
+	__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(User, null), document.getElementById('app'));
 }
 
 /***/ }),
@@ -53711,32 +53789,48 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
-var User = function (_React$Component) {
-	_inherits(User, _React$Component);
+var Create = function (_React$Component) {
+	_inherits(Create, _React$Component);
 
-	function User() {
-		_classCallCheck(this, User);
+	function Create() {
+		_classCallCheck(this, Create);
 
-		var _this = _possibleConstructorReturn(this, (User.__proto__ || Object.getPrototypeOf(User)).call(this));
+		var _this = _possibleConstructorReturn(this, (Create.__proto__ || Object.getPrototypeOf(Create)).call(this));
 
 		_this.state = {
-			data: []
+			name: '',
+			email: '',
+			password: ''
 		};
 		return _this;
 	}
 
-	_createClass(User, [{
-		key: 'componentWillMount',
-		value: function componentWillMount() {
-			var $this = this;
-
-			axios.get('/api/users').then(function (response) {
-				$this.setState({
-					data: response.data
-				});
-			}).catch(function (error) {
-				console.log(error);
+	_createClass(Create, [{
+		key: 'handleNameChange',
+		value: function handleNameChange(e) {
+			this.setState({
+				name: e.target.value
 			});
+		}
+	}, {
+		key: 'handleEmailChange',
+		value: function handleEmailChange(e) {
+			this.setState({
+				email: e.target.value
+			});
+		}
+	}, {
+		key: 'handlePasswordChange',
+		value: function handlePasswordChange(e) {
+			this.setState({
+				password: e.target.value
+			});
+		}
+	}, {
+		key: 'handleChange',
+		value: function handleChange(e) {
+			e.preventDefault();
+			console.log(this.state);
 		}
 	}, {
 		key: 'render',
@@ -53747,92 +53841,79 @@ var User = function (_React$Component) {
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 					'h2',
 					null,
-					'Users listing'
+					'Add New User'
 				),
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-					'table',
-					{ className: 'table table-bordered' },
+					'form',
+					{ className: 'form-horizontal', onChange: this.handleChange.bind(this) },
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-						'thead',
-						null,
+						'div',
+						{ className: 'form-group' },
 						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-							'tr',
-							null,
-							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-								'th',
-								null,
-								'ID'
-							),
-							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-								'th',
-								null,
-								'Name'
-							),
-							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-								'th',
-								null,
-								'Email'
-							),
-							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-								'th',
-								null,
-								'Action'
-							)
+							'label',
+							{ className: 'control-label col-sm-2', htmlFor: '' },
+							'Name:'
+						),
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'div',
+							{ className: 'col-sm-10' },
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'form-control', type: 'text', name: 'name', value: this.state.name, onChange: this.handleNameChange.bind(this) })
 						)
 					),
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-						'tbody',
-						null,
-						this.state.data.map(function (user, i) {
-							return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-								'tr',
-								null,
-								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-									'td',
-									null,
-									user.id
-								),
-								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-									'td',
-									null,
-									user.name
-								),
-								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-									'td',
-									null,
-									user.email
-								),
-								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-									'td',
-									null,
-									__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-										'a',
-										{ href: '', className: 'btn btn-primary' },
-										'edit'
-									),
-									' ||',
-									__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-										'a',
-										{ href: '', className: 'btn btn-danger' },
-										'delete'
-									)
-								)
-							);
-						})
+						'div',
+						{ className: 'form-group' },
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'label',
+							{ className: 'control-label col-sm-2', htmlFor: '' },
+							'Email:'
+						),
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'div',
+							{ className: 'col-sm-10' },
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'form-control', type: 'text', name: 'email', value: this.state.email, onChange: this.handleEmailChange.bind(this) })
+						)
+					),
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'div',
+						{ className: 'form-group' },
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'label',
+							{ className: 'control-label col-sm-2', htmlFor: '' },
+							'Password:'
+						),
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'div',
+							{ className: 'col-sm-10' },
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'form-control', type: 'text', name: 'password', value: this.state.password, onChange: this.handlePasswordChange.bind(this) })
+						)
+					),
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'div',
+						{ className: 'form-group' },
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'div',
+							{ className: 'col-sm-offset-2 col-sm-10' },
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+								'button',
+								{ className: 'btn btn-default', type: 'submit' },
+								'Save'
+							)
+						)
 					)
 				)
 			);
 		}
 	}]);
 
-	return User;
+	return Create;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (User);
+/* harmony default export */ __webpack_exports__["default"] = (Create);
 
 
-if (document.getElementById('app')) {
-	__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(User, null), document.getElementById('app'));
+if (document.getElementById('create')) {
+	__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Create, null), document.getElementById('create'));
 }
 
 /***/ }),

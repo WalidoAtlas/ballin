@@ -27,6 +27,7 @@ export default class User extends React.Component{
 		return(
 			<div>
 				<h2>Users listing</h2>
+				<a href="/users/create" className="btn btn-primary">Add a new User</a>
 				<table className="table table-bordered">
 					<thead>
 						<tr>
@@ -37,8 +38,8 @@ export default class User extends React.Component{
 						</tr>
 					</thead>
 					<tbody>
-						{this.state.data.map((user,i)=>{
-						return  <tr>
+						{this.state.data.map((user,i) => (
+								<tr>
 									<td>{user.id}</td>
 									<td>{user.name}</td>
 									<td>{user.email}</td>
@@ -47,7 +48,7 @@ export default class User extends React.Component{
 										<a href="" className="btn btn-danger">delete</a>
 									</td>
 								</tr>	
-							}
+							)
 						)}
 					</tbody>
 				</table>
