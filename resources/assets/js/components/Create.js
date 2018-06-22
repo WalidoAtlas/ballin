@@ -34,13 +34,16 @@ export default class Create extends React.Component{
 	handleChange(e){
 		e.preventDefault();
 		console.log(this.state);
+		axios.post('/api/users',this.state).then((response)=>{
+			console.log(response);
+		});
 	}
 
 	render() {
 		return(
 			<div>
 				<h2>Add New User</h2>
-				<form className="form-horizontal" onChange={this.handleChange.bind(this)}>
+				<form className="form-horizontal" onSubmit={this.handleChange.bind(this)}>
 					<div className="form-group">
 						<label className="control-label col-sm-2" htmlFor="">Name:</label>
 						<div className="col-sm-10">
@@ -56,7 +59,7 @@ export default class Create extends React.Component{
 					<div className="form-group">
 						<label className="control-label col-sm-2" htmlFor="">Password:</label>
 						<div className="col-sm-10">
-							<input className="form-control" type="text" name="password" value={this.state.password} onChange={this.handlePasswordChange.bind(this)}/>
+							<input className="form-control" type="password" name="password" value={this.state.password} onChange={this.handlePasswordChange.bind(this)}/>
 						</div>
 					</div>
 					<div className="form-group">

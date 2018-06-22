@@ -53831,6 +53831,9 @@ var Create = function (_React$Component) {
 		value: function handleChange(e) {
 			e.preventDefault();
 			console.log(this.state);
+			axios.post('/api/users', this.state).then(function (response) {
+				console.log(response);
+			});
 		}
 	}, {
 		key: 'render',
@@ -53845,7 +53848,7 @@ var Create = function (_React$Component) {
 				),
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 					'form',
-					{ className: 'form-horizontal', onChange: this.handleChange.bind(this) },
+					{ className: 'form-horizontal', onSubmit: this.handleChange.bind(this) },
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 						'div',
 						{ className: 'form-group' },
@@ -53885,7 +53888,7 @@ var Create = function (_React$Component) {
 						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 							'div',
 							{ className: 'col-sm-10' },
-							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'form-control', type: 'text', name: 'password', value: this.state.password, onChange: this.handlePasswordChange.bind(this) })
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'form-control', type: 'password', name: 'password', value: this.state.password, onChange: this.handlePasswordChange.bind(this) })
 						)
 					),
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
