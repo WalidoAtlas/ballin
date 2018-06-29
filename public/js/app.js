@@ -41194,8 +41194,28 @@ var User = function (_React$Component) {
 			});
 		}
 	}, {
+		key: 'deleteUser',
+		value: function deleteUser(user) {
+			var _this2 = this;
+
+			axios.delete('/api/users/' + user.id).then(function (response) {
+				console.log(user);
+
+				//changeState
+				var newState = _this2.state.data.slice();
+				newState.splice(newState.indexOf(user), 1);
+				_this2.setState({
+					data: newState
+				});
+			}).catch(function (err) {
+				console.log(err);
+			});
+		}
+	}, {
 		key: 'render',
 		value: function render() {
+			var _this3 = this;
+
 			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 				'div',
 				null,
@@ -41273,7 +41293,7 @@ var User = function (_React$Component) {
 									' ||',
 									__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 										'a',
-										{ href: '', className: 'btn btn-danger' },
+										{ href: 'javascript:;', className: 'btn btn-danger', onClick: _this3.deleteUser.bind(_this3, user) },
 										'delete'
 									)
 								)

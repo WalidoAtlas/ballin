@@ -23,6 +23,23 @@ export default class User extends React.Component{
 		});
 	}
 
+	deleteUser(user){
+
+		axios.delete('/api/users/'+user.id).then(response=>{
+			console.log(user);
+
+			//changeState
+			const newState = this.state.data.slice();
+			newState.splice(newState.indexOf(user),1);
+			this.setState({
+				data:newState
+			})
+		}).catch(err=>{
+			console.log(err);
+		})
+		
+	}
+
 	render() {
 		return(
 			<div>
@@ -45,7 +62,7 @@ export default class User extends React.Component{
 									<td>{user.email}</td>
 									<td>
 										<a href="" className="btn btn-primary">edit</a> || 
-										<a href="" className="btn btn-danger">delete</a>
+										<a href="javascript:;" className="btn btn-danger" onClick={this.deleteUser.bind(this,user)}>delete</a>
 									</td>
 								</tr>	
 							)
